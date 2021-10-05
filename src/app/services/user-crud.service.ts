@@ -15,7 +15,7 @@ export class User {
 
 
 export class UserCrudService {
-  endpoint = 'http://localhost:3000';
+  endpoint = 'http://localhost:5000/api';
 
   httpOptions = {
     // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -24,12 +24,19 @@ export class UserCrudService {
 
   constructor(private httpClient: HttpClient) { }
 
-  createUser(user: User): Observable<any> {
+  createUser(user: User) {
     return this.httpClient.post<User>(this.endpoint + '/create-user', JSON.stringify(user), this.httpOptions)
     .pipe(
       catchError(this.handleError<User>('error occured'))
     );
   }
+
+  login(user: User) {
+    return this.httpClient.post<User>(this.endpoint + '/login', JSON.stringify(user), this.httpOptions)
+    .pipe(
+      catchError(this.handleError<User>('error occured logging in'))
+    );
+  };
 
 
   private handleError<T>(operation = 'operation', result?: T){
