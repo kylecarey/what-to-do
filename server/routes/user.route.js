@@ -7,22 +7,22 @@ let UserModel = require('../model/User');
 userRoute.route('/').get((req, res) => {
   UserModel.find((error, user) => {
     if (error) {
-      return next(error)
+      return next(error);
     } else {
-      res.json(user)
-      console.log('Users retrieved!')
+      res.json(user);
+      console.log('Users retrieved!');
     }
-  })
-})
+  });
+});
 
 
 userRoute.route('/create-user').post((req, res, next) => {
   UserModel.create(req.body, (err, user) => {
     if (err) {
-      return next(err)
+      return next(err);
     } else {
-      res.json(user)
-      console.log('User created!')
+      res.json(user);
+      console.log('User created!');
     }
   })
 });
